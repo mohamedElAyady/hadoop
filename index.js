@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const { hadoopSteps } = require('./steps');
 const fetch = global.fetch || require('node-fetch');
 
 const app = express();
@@ -27,12 +28,11 @@ app.get('/ask', async (req, res) => {
       headers: {
         "Authorization": `Bearer ${API_KEY}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost:3000",
+        "HTTP-Referer": "http://www.hadoop.vercel.app",
         "X-Title": "CodeHelper"
       },
       body: JSON.stringify({
-        model: "openai/gpt-4o",
-        max_tokens: 500,
+        model: "google/gemma-3-27b-it:free",
         messages: [
           {
             role: "system",
@@ -65,6 +65,19 @@ app.get('/ask', async (req, res) => {
     res.send(`Error: ${err.message}`);
   }
 });
+
+app.get('/hadoop', (req, res) => {
+  const step = parseInt(req.query.install, 10);
+
+  if (!step || step < 1 || step > hadoopSteps.length) {
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    return res.send(`Invalid step. Please use ?install=1 to ${hadoopSteps.length}`);
+  }
+
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.send(hadoopSteps[step - 1]);
+});
+
 
 app.listen(PORT, () => {
   console.log(`✅ Server is running at port ${PORT}`);
