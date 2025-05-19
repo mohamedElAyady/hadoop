@@ -1,9 +1,10 @@
 from flask import Flask, request, Response
 import requests
+import os
 
 app = Flask(__name__)
 
-# Put your OpenRouter API key here (for production, use environment variables)
+# API key hardcoded (not recommended for production)
 OPENROUTER_API_KEY = "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"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -42,4 +43,5 @@ def ask():
         return Response(f"Unexpected error\nDetails: {str(e)}", status=500)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
