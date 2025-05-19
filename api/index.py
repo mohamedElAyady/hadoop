@@ -41,5 +41,5 @@ def ask():
     except Exception as e:
         return Response(f"Unexpected error\nDetails: {str(e)}", status=500)
 
-# Expose Flask app as handler for Vercel
-handler = app
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
