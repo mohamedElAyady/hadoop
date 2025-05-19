@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # API key hardcoded (not recommended for production)
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 SYSTEM_PROMPT = "Be brief and smart. You will help by providing commands and code."
