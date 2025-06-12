@@ -32,8 +32,7 @@ app.get('/ask', async (req, res) => {
         "X-Title": "CodeHelper"
       },
       body: JSON.stringify({
-        model: "deepseek/deepseek-r1-0528:free",
-        // model: "google/gemma-3-27b-it:free",
+        model: "google/gemma-3-27b-it:free",
         messages: [
           {
             role: "system",
