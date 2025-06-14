@@ -26,18 +26,3 @@ public class GenerateMatrix {
 // Commands:
 javac GenerateMatrix.java
 java GenerateMatrix`;
-
-// Send the response
-if (typeof window === 'undefined') {
-    // Server-side execution
-    const express = require('express');
-    const router = express.Router();
-    router.get('/', (req, res) => {
-        res.setHeader('Content-Type', 'text/plain');
-        res.send(code);
-    });
-    module.exports = router;
-} else {
-    // Client-side execution (if needed)
-    document.body.textContent = code;
-}
