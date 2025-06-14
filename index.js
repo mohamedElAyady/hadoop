@@ -16,6 +16,20 @@ app.use(express.static('public'));
 
 console.log("🔑 API KEY (truncated):", API_KEY.slice(0, 10));
 
+// Add route to handle direct step file requests
+app.get('/step:num.js', (req, res) => {
+    const stepNum = parseInt(req.params.num, 10);
+    const filePath = path.join(__dirname, 'public', `step${stepNum}.js`);
+    
+    res.setHeader('Content-Type', 'text/javascript');
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            res.status(404).send('Step not found');
+        }
+    });
+});
+
+
 app.get('/ask', async (req, res) => {
   const prompt = req.query.prompt;
 
