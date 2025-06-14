@@ -12,6 +12,8 @@ if (!API_KEY) {
   process.exit(1);
 }
 
+app.use(express.static('public'));
+
 console.log("🔑 API KEY (truncated):", API_KEY.slice(0, 10));
 
 app.get('/ask', async (req, res) => {
